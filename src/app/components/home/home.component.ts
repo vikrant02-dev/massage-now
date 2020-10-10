@@ -6,6 +6,11 @@ import * as am4core from '@amcharts/amcharts4/core';
 import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 
+interface Dropdown {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -13,7 +18,31 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 })
 export class HomeComponent implements OnInit {
   private chart: am4charts.XYChart;
-
+  locations: Dropdown[] = [
+    {value: 'All', viewValue: 'All'},
+    {value: 'Kalgoorlie', viewValue: 'Kalgoorlie'},
+    {value: 'Busselton', viewValue: 'Busselton'},
+    {value: 'Mandurah', viewValue: 'Mandurah'}
+  ];
+  views: Dropdown[] = [
+    {value: 'Weekly', viewValue: 'Weekly'},
+    {value: 'Monthly', viewValue: 'Monthly'},
+    {value: 'Yearly', viewValue: 'Yearly'}
+  ];
+  months: Dropdown[] = [
+    {value: 'January', viewValue: 'January'},
+    {value: 'February', viewValue: 'February'},
+    {value: 'March', viewValue: 'March'},
+    {value: 'April', viewValue: 'April'},
+    {value: 'May', viewValue: 'May'},
+    {value: 'June', viewValue: 'June'},
+    {value: 'July', viewValue: 'July'},
+    {value: 'August', viewValue: 'August'},
+    {value: 'September', viewValue: 'September'},
+    {value: 'October', viewValue: 'October'},
+    {value: 'November', viewValue: 'November'},
+    {value: 'December', viewValue: 'December'}
+  ];
   private pieChartMarketing: am4charts.PieChart;
   private pieChartRevenue: am4charts.PieChart;
   private pieChartProducts: am4charts.PieChart;
@@ -32,6 +61,9 @@ export class HomeComponent implements OnInit {
   private new: number = 269;
   private pcGenderMale: number;
   private pcOld: number;
+  private selectedLocation: string = 'All';
+  private selectedView: string = 'Monthly';
+  private selectedMonth: string = 'January'
   constructor(@Inject(PLATFORM_ID) private platformId, private zone: NgZone) { }
 
   ngOnInit() {

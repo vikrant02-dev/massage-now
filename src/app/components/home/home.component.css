@@ -40,3 +40,7 @@
     border-radius: 50%;
     display: inline-block;
   }
+
+  .mat-form-width {
+    width: 131px !important;
+}
