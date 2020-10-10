@@ -19,6 +19,11 @@
     font-size: 14px;
 }
 
+.boldblue {
+    color: #3f51b5;;
+    font-size: 18px;
+}
+
 .mat-progress-bar {
     width: 330px !important;
     height: 30px !important;

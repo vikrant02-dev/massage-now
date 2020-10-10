@@ -11,14 +11,20 @@ interface Dropdown {
   viewValue: string;
 }
 
-export interface PeriodicElement {
+export interface TableElement {
   name: string;
   position: string;
   weight: string;
   symbol: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
+export interface AverageTableElement {
+  name: string;
+  time: number;
+  reference: string;
+}
+
+const ELEMENT_DATA: TableElement[] = [
   {position: '1st', name: 'Inaaya Dunlop', weight: '$6,000.00', symbol: '3 days ago'},
   {position: '2nd', name: 'Dillon Butt', weight: '$6,000.00', symbol: '3 days ago'},
   {position: '3rd', name: 'Chanelle Cooley', weight: '$6,000.00', symbol: '3 days ago'},
@@ -31,6 +37,14 @@ const ELEMENT_DATA: PeriodicElement[] = [
   {position: '10th', name: 'Maheen Haley', weight: '$6,000.00', symbol: '3 days ago'},
 ];
 
+const ELEMENT_DATA_AVERAGE_WAITED: AverageTableElement[] = [
+  {name: 'Katelyn Arnold', time: 30, reference: '1011542650'},
+  {name: 'Dillon Butt', time: 27, reference: '7485630495'},
+  {name: 'Chanelle Cooley', time: 18, reference: '4660987749'},
+  {name: 'Ayda Foreman', time: 15, reference: '8700698182'},
+  {name: 'Dougie Miles', time: 9, reference: '8700698182'},
+];
+
 
 @Component({
   selector: 'app-home',
@@ -41,7 +55,9 @@ export class HomeComponent implements OnInit {
   private chart: am4charts.XYChart;
 
   displayedColumns: string[] = ['position', 'name', 'spent', 'lastSession'];
+  displayedColumnsAverageWaitedTime: string[] = ['name', 'time', 'reference'];
   dataSourceTopSpender = ELEMENT_DATA;
+  dataSourceAverageWaited = ELEMENT_DATA_AVERAGE_WAITED;
 
   locations: Dropdown[] = [
     {value: 'All', viewValue: 'All'},
@@ -90,6 +106,7 @@ export class HomeComponent implements OnInit {
   private selectedView: string = 'Monthly';
   private selectedMonth: string = 'January';
   private selectedCompare: string = '';
+  private averageWaitedTime: number = 0;
   constructor(@Inject(PLATFORM_ID) private platformId, private zone: NgZone) { }
 
   ngOnInit() {
@@ -107,6 +124,12 @@ export class HomeComponent implements OnInit {
     this.makePieChartProducts();
     this.makePieChartPaymentMethods();
     this.makePieChartProfit();
+    let totalWaitedTime = 0;
+    this.dataSourceAverageWaited.forEach(element => {
+      totalWaitedTime += element.time;
+    });
+    this.averageWaitedTime = totalWaitedTime / this.dataSourceAverageWaited.length
+    
   }
 
     // Run the function only in the browser

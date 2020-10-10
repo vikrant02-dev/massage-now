@@ -128,7 +128,7 @@
             <div id="pieChartServicesdiv" style="width: 100%; height: 200px"></div>    
         </div>
 
-        <div>
+        <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-between center">
             <ol>
                 <ng-container *ngFor="let item of pieServicesList">
                    <li>{{item}}</li>
@@ -145,7 +145,7 @@
             </mat-card-header>
             <div id="pieChartProductsdiv" style="width: 100%; height: 200px"></div>
         </div>
-        <div>
+        <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-between none">
             <ol>
                 <ng-container *ngFor="let item of pieProductsList">
                    <li>{{item}}</li>
@@ -166,11 +166,11 @@
                   </mat-card-header>
 
                   <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-end none">
-                    <div fxFlex="40" fxLayout="row" fxLayoutAlign="space-between center">
-                        <span class="dot-darkblue"></span> <span> {{pcGenderMale | number:'1.0-0'}}% Male</span>
+                    <div class="boldblue" fxFlex="40" fxLayout="row" fxLayoutAlign="space-between center">
+                        <span class="dot-darkblue"></span><span>{{pcGenderMale | number:'1.0-0'}}% Male</span>
                     </div>
                     <div fxFlex="20"></div>
-                    <div fxFlex="40" fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="boldblue" fxFlex="40" fxLayout="row" fxLayoutAlign="space-between center">
                         <span>{{100 - pcGenderMale | number:'1.0-0'}}% Female</span> <span class="dot-lightblue"></span>
                     </div>
                   </div>
@@ -179,12 +179,12 @@
                   <br/>
                   <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-end none">
                     <div fxFlex="30" fxLayout="column" fxLayoutAlign="space-between center">
-                        <span>{{male}}</span> 
+                        <span class="boldblue">{{male}}</span> 
                         <span class="subtitle">Male</span>
                     </div>
                     <div fxFlex="50"></div>
                     <div fxFlex="30" fxLayout="column" fxLayoutAlign="space-between center">
-                        <span>{{female}}</span>
+                        <span class="boldblue">{{female}}</span>
                         <span class="subtitle">Female</span>
                     </div>
                   </div>
@@ -205,11 +205,11 @@
                       <p class="subtitle">As of month selected</p>
                   </mat-card-header>
                   <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-end none">
-                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="boldblue" fxFlex="30" fxLayout="row" fxLayoutAlign="space-between center">
                         <span class="dot-darkblue"></span>{{pcOld | number:'1.0-0'}}% Old
                     </div>
                     <div fxFlex="40"></div>
-                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="boldblue" fxFlex="30" fxLayout="row" fxLayoutAlign="space-between center">
                         {{100 - pcOld | number:'1.0-0'}}% New <span class="dot-lightblue"></span>
                     </div>
                   </div><br/>
@@ -217,12 +217,12 @@
                   <br/>
                   <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-end none">
                     <div fxFlex="30" fxLayout="column" fxLayoutAlign="space-between center">
-                        <span>529</span> 
-                        <span class="subtitle">Old</span>
+                        <span class="boldblue">529</span> 
+                        <span class="subtitle">Returned</span>
                     </div>
                     <div fxFlex="50"></div>
                     <div fxFlex="30" fxLayout="column" fxLayoutAlign="space-between center">
-                        <span>269</span>
+                        <span class="boldblue">269</span>
                         <span class="subtitle">New</span>
                     </div>
                   </div>
@@ -231,9 +231,11 @@
                   <mat-card-header>
                       <mat-card-title>Profit</mat-card-title>
                   </mat-card-header>
+                  <div fxLayout="column" fxLayoutAlign="space-between center">
+                    <div id="pieChartProfitdiv" style="width: 100%; height: 200px"></div>
+                    <h4 class="boldblue" style="float: right;">${{totalProfit}}</h4>
+                  </div>
 
-                  <div id="pieChartProfitdiv" style="width: 100%; height: 200px"></div>
-                  <h4 style="float: right;">${{totalProfit}}</h4>
               </div>
           </div>
 
@@ -241,41 +243,46 @@
               <mat-card-header>
                   <mat-card-title>Top Spender Customer</mat-card-title>
               </mat-card-header>
+              <div fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-between center">
+                <table mat-table [dataSource]="dataSourceTopSpender">
 
-              <table mat-table [dataSource]="dataSourceTopSpender">
+                    <!--- Note that these columns can be defined in any order.
+                          The actual rendered columns are set as a property on the row definition" -->
+                  
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="position">
+                      <th mat-header-cell *matHeaderCellDef>  </th>
+                      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+                    </ng-container>
+                  
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="name">
+                      <th mat-header-cell *matHeaderCellDef> Name </th>
+                      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+                  
+                    <!-- Spent Column -->
+                    <ng-container matColumnDef="spent">
+                      <th mat-header-cell *matHeaderCellDef> Spent </th>
+                      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+                    </ng-container>
+                  
+                    <!-- Last Session Column -->
+                    <ng-container matColumnDef="lastSession">
+                      <th mat-header-cell *matHeaderCellDef> Last Session </th>
+                      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+                    </ng-container>
+                  
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  </table>                  
+              
+                  <button mat-raised-button color="primary">Show more</button>
+              
+              </div>
 
-                <!--- Note that these columns can be defined in any order.
-                      The actual rendered columns are set as a property on the row definition" -->
-              
-                <!-- Position Column -->
-                <ng-container matColumnDef="position">
-                  <th mat-header-cell *matHeaderCellDef>  </th>
-                  <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-                </ng-container>
-              
-                <!-- Name Column -->
-                <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef> Name </th>
-                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-                </ng-container>
-              
-                <!-- Spent Column -->
-                <ng-container matColumnDef="spent">
-                  <th mat-header-cell *matHeaderCellDef> Spent </th>
-                  <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-                </ng-container>
-              
-                <!-- Last Session Column -->
-                <ng-container matColumnDef="lastSession">
-                  <th mat-header-cell *matHeaderCellDef> Last Session </th>
-                  <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-                </ng-container>
-              
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-              </table>
-              
-              
+
+
           </div>
   </div>
 
@@ -284,6 +291,46 @@
           <mat-card-header>
               <mat-card-title>Average Waited Time</mat-card-title>
           </mat-card-header>
+
+          <div fxLayout="row" fxLayoutAlign="space-around none" fxLayoutGap="30px">
+            <div fxFlex="30" class="borderright" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="center center">
+                <p class="boldblue">{{averageWaitedTime | number:'1.0-0'}} </p>
+                <span class="subtitle">Average Waited Time</span>
+            </div>
+            <div fxFlex="70" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-around center">
+                <table mat-table [dataSource]="dataSourceAverageWaited">
+      
+                  <!--- Note that these columns can be defined in any order.
+                        The actual rendered columns are set as a property on the row definition" -->
+                
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Most Waited Customer </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                  </ng-container>
+                
+                  <!-- Spent Column -->
+                  <ng-container matColumnDef="time">
+                    <th mat-header-cell *matHeaderCellDef> Time </th>
+                    <td mat-cell *matCellDef="let element"> {{element.time}} </td>
+                  </ng-container>
+                
+                  <!-- Last Session Column -->
+                  <ng-container matColumnDef="reference">
+                    <th mat-header-cell *matHeaderCellDef> Reference Number </th>
+                    <td mat-cell *matCellDef="let element"> {{element.reference}} </td>
+                  </ng-container>
+                
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsAverageWaitedTime"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsAverageWaitedTime;"></tr>
+                </table>
+      
+                <button mat-raised-button color="primary">Show more</button>
+                    
+              </div>
+          </div>
+
+
       </div>
 
       <div class="rcorners2" fxFlex="50">
