@@ -11,6 +11,27 @@ interface Dropdown {
   viewValue: string;
 }
 
+export interface PeriodicElement {
+  name: string;
+  position: string;
+  weight: string;
+  symbol: string;
+}
+
+const ELEMENT_DATA: PeriodicElement[] = [
+  {position: '1st', name: 'Inaaya Dunlop', weight: '$6,000.00', symbol: '3 days ago'},
+  {position: '2nd', name: 'Dillon Butt', weight: '$6,000.00', symbol: '3 days ago'},
+  {position: '3rd', name: 'Chanelle Cooley', weight: '$6,000.00', symbol: '3 days ago'},
+  {position: '4rth', name: 'Ayda Foreman', weight: '$6,000.00', symbol: '3 days ago'},
+  {position: '5th', name: 'Dougie Miles', weight: '$6,000.00', symbol: '3 days ago'},
+  {position: '6th', name: 'Jordanna Cuevas', weight: '$6,000.00', symbol: '3 days ago'},
+  {position: '7th', name: 'Shayna Harper', weight: '$6,000.00', symbol: '3 days ago'},
+  {position: '8th', name: 'Katelyn Arnold', weight: '$6,000.00', symbol: '3 days ago'},
+  {position: '9th', name: 'Tim Oconnell', weight: '$6,000.00', symbol: '3 days ago'},
+  {position: '10th', name: 'Maheen Haley', weight: '$6,000.00', symbol: '3 days ago'},
+];
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -18,6 +39,10 @@ interface Dropdown {
 })
 export class HomeComponent implements OnInit {
   private chart: am4charts.XYChart;
+
+  displayedColumns: string[] = ['position', 'name', 'spent', 'lastSession'];
+  dataSourceTopSpender = ELEMENT_DATA;
+
   locations: Dropdown[] = [
     {value: 'All', viewValue: 'All'},
     {value: 'Kalgoorlie', viewValue: 'Kalgoorlie'},
@@ -63,7 +88,8 @@ export class HomeComponent implements OnInit {
   private pcOld: number;
   private selectedLocation: string = 'All';
   private selectedView: string = 'Monthly';
-  private selectedMonth: string = 'January'
+  private selectedMonth: string = 'January';
+  private selectedCompare: string = '';
   constructor(@Inject(PLATFORM_ID) private platformId, private zone: NgZone) { }
 
   ngOnInit() {

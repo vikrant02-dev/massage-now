@@ -44,3 +44,11 @@
   .mat-form-width {
     width: 131px !important;
 }
+
+table {
+    width: 100%;
+  }
+  
+.mat-table {
+    background: #fafafa;;
+}
