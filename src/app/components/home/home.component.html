@@ -98,6 +98,18 @@
                       <mat-card-title>Customer Gender</mat-card-title>
                       <p class="subtitle">As of month selected</p>
                   </mat-card-header>
+
+                  <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-end none">
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between center">
+                        <span class="dot-darkblue"></span> <span>Male</span>
+                    </div>
+                    <div fxFlex="50"></div>
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between center">
+                        <span>Female</span> <span class="dot-lightblue"></span>
+                    </div>
+                  </div>
+                  <br/>
+                  <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
               </div>
               <div class="rcorners2">
                   <mat-card-header>
@@ -114,6 +126,16 @@
                       <mat-card-title>New vs Return</mat-card-title>
                       <p class="subtitle">As of month selected</p>
                   </mat-card-header>
+                  <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-end none">
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between center">
+                        <span class="dot-darkblue"></span> Old
+                    </div>
+                    <div fxFlex="50"></div>
+                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between center">
+                        New <span class="dot-lightblue"></span>
+                    </div>
+                  </div><br/>
+                  <mat-progress-bar mode="determinate" value="80"></mat-progress-bar>
               </div>
               <div class="rcorners2">
                   <mat-card-header>
