@@ -13,20 +13,82 @@
               <mat-card-header>
                   <mat-card-title>Marketing Source</mat-card-title>
               </mat-card-header>
-              <div id="pieChartdiv" style="width: 100%; height: 500px"></div>
+
+              <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
+                <div id="pieChartMarketingdiv" style="width: 100%; height: 200px"></div>
+
+                <div>
+                    <ol>
+                        <ng-container *ngFor="let item of pieMarketingList">
+                           <li>{{item}}</li>
+                        </ng-container>    
+                    </ol>
+                </div>
+              </div>
           </div>
           <div class="rcorners2">
               <mat-card-header>
                   <mat-card-title>Current Cash in Drawer</mat-card-title>
               </mat-card-header>
+              <br/>
+              <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
+                    <div class="borderright">
+                        <mat-card-header>
+                            <mat-card-title>$12,434</mat-card-title>
+                        </mat-card-header>
+                        <h5>Kalgoorlie</h5>
+                    </div>
+                    <div class="borderright">
+                        <mat-card-header>
+                            <mat-card-title>$14,343</mat-card-title>
+                        </mat-card-header>
+                        <h5>Busselton</h5>
+                    </div>
+                    <div>
+                        <mat-card-header>
+                            <mat-card-title>$9,439</mat-card-title>
+                        </mat-card-header>
+                        <h5>Mandoorah</h5>
+                    </div>
+              </div>
           </div>
       </div>
   </div>
 
   <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="30px" class="rcorners2">
-      <div>1</div>
-      <div>2</div>
-      <div>3</div>
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+        <div id="pieChartRevenuediv" style="width: 100%; height: 200px"></div>
+
+        <div>
+            <ol>
+                <ng-container *ngFor="let item of pieRevenueList">
+                   <li>{{item}}</li>
+                </ng-container>    
+            </ol>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between none" >
+        <div id="pieChartServicesdiv" style="width: 100%; height: 200px"></div>
+
+        <div>
+            <ol>
+                <ng-container *ngFor="let item of pieServicesList">
+                   <li>{{item}}</li>
+                </ng-container>    
+            </ol>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between none">
+        <div id="pieChartProductsdiv" style="width: 100%; height: 200px"></div>
+
+        <div>
+            <ol>
+                <ng-container *ngFor="let item of pieProductsList">
+                   <li>{{item}}</li>
+                </ng-container>    
+            </ol>
+        </div>
+    </div>
   </div>
 
   <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="30px">

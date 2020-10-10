@@ -1,4 +1,4 @@
-import { Component, Inject, NgZone, PLATFORM_ID, OnInit } from '@angular/core';
+import { Component, Inject, NgZone, PLATFORM_ID, OnInit, AfterViewInit } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 // amCharts imports
@@ -13,11 +13,26 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 })
 export class HomeComponent implements OnInit {
   private chart: am4charts.XYChart;
-  private pieChart: am4charts.PieChart;
-    
+  private pieChartMarketing: am4charts.PieChart;
+  
+  private pieChartRevenue: am4charts.PieChart;
+  private pieChartProducts: am4charts.PieChart;
+  private pieChartServices: am4charts.PieChart;
+  private pieMarketingList: string[];
+  private pieRevenueList: string[];
+  private pieServicesList: string[];
+  private pieProductsList: string[];
   constructor(@Inject(PLATFORM_ID) private platformId, private zone: NgZone) { }
 
   ngOnInit() {
+    console.log('onINIT')
+    // Chart code goes in here
+    //this.makeSampleChart();
+    this.makePieChartMarketingSource();
+    this.makeSampleChart();
+    this.makePieChartRevenue();
+    this.makePieChartServices();
+    this.makePieChartProducts();
   }
 
     // Run the function only in the browser
@@ -29,18 +44,23 @@ export class HomeComponent implements OnInit {
       }
     }
 
-    ngAfterViewInit() {
-      // Chart code goes in here
-      this.makeSampleChart();
-      this.makePieChart();
-    }
+    // ngAfterViewInit() {
+    //   console.log('afterviewInit')
+    //   // Chart code goes in here
+    //   //this.makeSampleChart();
+    //   this.makePieChartMarketingSource();
+    //   this.makeSampleChart();
+    //   this.makePieChartRevenue();
+    //   this.makePieChartServices();
+    //   this.makePieChartProducts();
+    // }
   
 
-    makePieChart() {
+    makePieChartMarketingSource() {
       this.browserOnly(() => {
         am4core.useTheme(am4themes_animated);
   
-        let chart = am4core.create("pieChartdiv", am4charts.PieChart);
+        let chart = am4core.create("pieChartMarketingdiv", am4charts.PieChart);
         chart.data = [{
           "country": "Lithuania",
           "litres": 501.9
@@ -72,8 +92,107 @@ export class HomeComponent implements OnInit {
         let pieSeries = chart.series.push(new am4charts.PieSeries());
         pieSeries.dataFields.value = "litres";
         pieSeries.dataFields.category = "country";
-        
-        this.pieChart = chart;
+        pieSeries.labels.template.disabled = true;
+        this.pieChartMarketing = chart;
+        this.pieMarketingList = [];
+        chart.data.forEach(element => {
+          this.pieMarketingList.push(element['country']);
+        });
+      });
+    }
+
+    makePieChartRevenue() {
+      this.browserOnly(() => {
+        am4core.useTheme(am4themes_animated);
+  
+        let chart = am4core.create("pieChartRevenuediv", am4charts.PieChart);
+        chart.data = [{
+          "type": "Services",
+          "revenue": 60.56
+        }, {
+          "type": "Products",
+          "revenue": 43.88
+        }, {
+          "type": "Voucher",
+          "revenue": 8.99
+        }];
+        let pieSeries = chart.series.push(new am4charts.PieSeries());
+        pieSeries.dataFields.value = "revenue";
+        pieSeries.dataFields.category = "type";
+        pieSeries.labels.template.disabled = true;
+        this.pieChartRevenue = chart;
+        this.pieRevenueList = [];
+        chart.data.forEach(element => {
+          this.pieRevenueList.push(element['type']);
+        });
+      });
+    }
+
+    
+    makePieChartServices() {
+      this.browserOnly(() => {
+        am4core.useTheme(am4themes_animated);
+  
+        let chart = am4core.create("pieChartServicesdiv", am4charts.PieChart);
+        chart.data = [{
+          "type": "Relaxation Massage",
+          "value": 40
+        }, {
+          "type": "Relaxation Massage",
+          "value": 20
+        }, {
+          "type": "Deep Tissue",
+          "value": 15
+        }, {
+          "type": "Remedial Massage",
+          "value": 18
+        }, {
+          "type": "Remedial Massage",
+          "value": 7
+        }];
+        let pieSeries = chart.series.push(new am4charts.PieSeries());
+        pieSeries.dataFields.value = "value";
+        pieSeries.dataFields.category = "type";
+        pieSeries.labels.template.disabled = true;
+        this.pieChartServices = chart;
+        this.pieServicesList = [];
+        chart.data.forEach(element => {
+          this.pieServicesList.push(element['type']);
+        });
+      });
+    }
+
+    
+    makePieChartProducts() {
+      this.browserOnly(() => {
+        am4core.useTheme(am4themes_animated);
+  
+        let chart = am4core.create("pieChartProductsdiv", am4charts.PieChart);
+        chart.data = [{
+          "type": "Relaxation Massage",
+          "value": 50
+        }, {
+          "type": "Relaxation Massage",
+          "value": 30
+        }, {
+          "type": "Deep Tissue",
+          "value": 15
+        }, {
+          "type": "Remedial Massage",
+          "value": 3
+        }, {
+          "type": "Remedial Massage",
+          "value": 1
+        }];
+        let pieSeries = chart.series.push(new am4charts.PieSeries());
+        pieSeries.dataFields.value = "value";
+        pieSeries.dataFields.category = "type";
+        pieSeries.labels.template.disabled = true;
+        this.pieChartProducts = chart;
+        this.pieProductsList = [];
+        chart.data.forEach(element => {
+          this.pieProductsList.push(element['type']);
+        });
       });
     }
 
@@ -122,6 +241,19 @@ export class HomeComponent implements OnInit {
         if (this.chart) {
           this.chart.dispose();
         }
+        if (this.pieChartMarketing) {
+          this.pieChartMarketing.dispose();
+        }
+        if (this.pieChartRevenue) {
+          this.pieChartRevenue.dispose();
+        }
+        if (this.pieChartProducts) {
+          this.pieChartProducts.dispose();
+        }
+        if (this.pieChartServices) {
+          this.pieChartServices.dispose();
+        }
+        
       });
     }  
 
