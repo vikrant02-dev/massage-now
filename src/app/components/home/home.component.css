@@ -1,0 +1,9 @@
+.mat-card-title {
+    color: rgba(85, 85, 85, 0.938);
+}
+
+.rcorners2 {
+    border-radius: 7px;
+    border: 3px solid rgba(168, 168, 168, 0.938);
+    padding: 20px;
+  }
