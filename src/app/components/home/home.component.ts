@@ -13,19 +13,24 @@ import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 })
 export class HomeComponent implements OnInit {
   private chart: am4charts.XYChart;
+
   private pieChartMarketing: am4charts.PieChart;
-  
   private pieChartRevenue: am4charts.PieChart;
   private pieChartProducts: am4charts.PieChart;
   private pieChartServices: am4charts.PieChart;
+  private pieChartPaymentMethod: am4charts.PieChart;
+  private pieChartProfits: am4charts.PieChart;
+
   private pieMarketingList: string[];
   private pieRevenueList: string[];
   private pieServicesList: string[];
   private pieProductsList: string[];
+  private totalProfit: number;
   constructor(@Inject(PLATFORM_ID) private platformId, private zone: NgZone) { }
 
   ngOnInit() {
-    console.log('onINIT')
+    console.log('onINIT');
+    this.totalProfit = 0;
     // Chart code goes in here
     //this.makeSampleChart();
     this.makePieChartMarketingSource();
@@ -33,6 +38,8 @@ export class HomeComponent implements OnInit {
     this.makePieChartRevenue();
     this.makePieChartServices();
     this.makePieChartProducts();
+    this.makePieChartPaymentMethods();
+    this.makePieChartProfit();
   }
 
     // Run the function only in the browser
@@ -196,6 +203,74 @@ export class HomeComponent implements OnInit {
       });
     }
 
+        
+    makePieChartPaymentMethods() {
+      this.browserOnly(() => {
+        am4core.useTheme(am4themes_animated);
+  
+        let chart = am4core.create("pieChartPaymentMethodsdiv", am4charts.PieChart);
+        chart.data = [{
+          "type": "CreditCard",
+          "value": 40
+        }, {
+          "type": "Razorpay",
+          "value": 20
+        }, {
+          "type": "Paypal",
+          "value": 16
+        }, {
+          "type": "Bank Transfer",
+          "value": 14
+        }, {
+          "type": "Bitcoin",
+          "value": 20
+        }];
+        let pieSeries = chart.series.push(new am4charts.PieSeries());
+        pieSeries.dataFields.value = "value";
+        pieSeries.dataFields.category = "type";
+        pieSeries.labels.template.disabled = true;
+        this.pieChartPaymentMethod = chart;
+        this.pieProductsList = [];
+        chart.data.forEach(element => {
+          this.pieProductsList.push(element['type']);
+        });
+      });
+    }
+
+        
+    makePieChartProfit() {
+      this.browserOnly(() => {
+        am4core.useTheme(am4themes_animated);
+  
+        let chart = am4core.create("pieChartProfitdiv", am4charts.PieChart);
+        chart.data = [{
+          "type": "Type 1",
+          "value": 30
+        }, {
+          "type": "Type 2",
+          "value": 25
+        }, {
+          "type": "Type 3",
+          "value": 25
+        }, {
+          "type": "Type 4",
+          "value": 15
+        }, {
+          "type": "Type 5",
+          "value": 5
+        }];
+        let pieSeries = chart.series.push(new am4charts.PieSeries());
+        pieSeries.dataFields.value = "value";
+        pieSeries.dataFields.category = "type";
+        pieSeries.labels.template.disabled = true;
+        this.pieChartProfits = chart;
+        this.pieProductsList = [];
+        chart.data.forEach(element => {
+          this.totalProfit += element['value'];
+        });
+      });
+    }
+
     makeSampleChart() {
       this.browserOnly(() => {
         am4core.useTheme(am4themes_animated);
@@ -252,6 +327,12 @@ export class HomeComponent implements OnInit {
         }
         if (this.pieChartServices) {
           this.pieChartServices.dispose();
+        }
+        if (this.pieChartPaymentMethod) {
+          this.pieChartPaymentMethod.dispose();
+        }
+        if (this.pieChartProfits) {
+          this.pieChartProfits.dispose();
         }
         
       });
