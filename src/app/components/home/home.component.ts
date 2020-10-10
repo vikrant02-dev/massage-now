@@ -230,10 +230,6 @@ export class HomeComponent implements OnInit {
         pieSeries.dataFields.category = "type";
         pieSeries.labels.template.disabled = true;
         this.pieChartPaymentMethod = chart;
-        this.pieProductsList = [];
-        chart.data.forEach(element => {
-          this.pieProductsList.push(element['type']);
-        });
       });
     }
 
@@ -264,10 +260,6 @@ export class HomeComponent implements OnInit {
         pieSeries.dataFields.category = "type";
         pieSeries.labels.template.disabled = true;
         this.pieChartProfits = chart;
-        this.pieProductsList = [];
-        chart.data.forEach(element => {
-          this.totalProfit += element['value'];
-        });
       });
     }
 
