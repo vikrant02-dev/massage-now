@@ -25,10 +25,19 @@ export class HomeComponent implements OnInit {
   private pieRevenueList: string[];
   private pieServicesList: string[];
   private pieProductsList: string[];
-  private totalProfit: number;
+  private totalProfit: number = 0;
+  private male: number = 278;
+  private female: number = 246;
+  private old: number = 549;
+  private new: number = 269;
+  private pcGenderMale: number;
+  private pcOld: number;
   constructor(@Inject(PLATFORM_ID) private platformId, private zone: NgZone) { }
 
   ngOnInit() {
+    this.pcGenderMale = this.male / (this.male + this.female) * 100;
+    this.pcOld = this.old / (this.old + this.new) * 100;
+
     console.log('onINIT');
     this.totalProfit = 0;
     // Chart code goes in here
@@ -232,24 +241,28 @@ export class HomeComponent implements OnInit {
         let chart = am4core.create("pieChartProfitdiv", am4charts.PieChart);
         chart.data = [{
           "type": "Type 1",
-          "value": 30
+          "value": 300
         }, {
           "type": "Type 2",
-          "value": 25
+          "value": 253
         }, {
           "type": "Type 3",
-          "value": 25
+          "value": 23
         }, {
           "type": "Type 4",
-          "value": 15
+          "value": 100
         }, {
           "type": "Type 5",
-          "value": 5
+          "value": 53
         }];
         let pieSeries = chart.series.push(new am4charts.PieSeries());
         pieSeries.dataFields.value = "value";
         pieSeries.dataFields.category = "type";
         pieSeries.labels.template.disabled = true;
+        chart.data.forEach(element => {
+          this.totalProfit += element['value'];
+          console.log(this.totalProfit, element['value'])
+        });
         this.pieChartProfits = chart;
       });
     }

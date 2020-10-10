@@ -56,19 +56,31 @@
   </div>
 
   <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="30px" class="rcorners2">
-    <div fxLayout="row" fxLayoutAlign="space-between none">
-        <div id="pieChartRevenuediv" style="width: 100%; height: 200px"></div>
+    <div class="borderright" fxLayout="row" fxLayoutAlign="space-between none">
+        <div>
+            <mat-card-header>
+                <mat-card-title>Revenue</mat-card-title>
+            </mat-card-header>
+            <br/>
+            <div id="pieChartRevenuediv" style="width: 100%; height: 200px"></div>    
+        </div>
 
         <div>
             <ol>
                 <ng-container *ngFor="let item of pieRevenueList">
                    <li>{{item}}</li>
                 </ng-container>    
-            </ol>
+            </ol> 
         </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="space-between none" >
-        <div id="pieChartServicesdiv" style="width: 100%; height: 200px"></div>
+    <div class="borderright" fxLayout="row" fxLayoutAlign="space-between none" >
+        <div>
+            <mat-card-header>
+                <mat-card-title>Services</mat-card-title>
+            </mat-card-header>
+            <br/>
+            <div id="pieChartServicesdiv" style="width: 100%; height: 200px"></div>    
+        </div>
 
         <div>
             <ol>
@@ -76,17 +88,25 @@
                    <li>{{item}}</li>
                 </ng-container>    
             </ol>
+            <br/>
+            <button mat-raised-button color="primary">Show more</button>
         </div>
     </div>
-    <div fxLayout="row" fxLayoutAlign="space-between none">
-        <div id="pieChartProductsdiv" style="width: 100%; height: 200px"></div>
-
+    <div class="borderright" fxLayout="row" fxLayoutAlign="space-start none">
+        <div>
+            <mat-card-header>
+                <mat-card-title>Services</mat-card-title>
+            </mat-card-header>
+            <div id="pieChartProductsdiv" style="width: 100%; height: 200px"></div>
+        </div>
         <div>
             <ol>
                 <ng-container *ngFor="let item of pieProductsList">
                    <li>{{item}}</li>
                 </ng-container>    
             </ol>
+            <br/>
+            <button mat-raised-button color="primary">Show more</button>
         </div>
     </div>
   </div>
@@ -100,16 +120,28 @@
                   </mat-card-header>
 
                   <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-end none">
-                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between center">
-                        <span class="dot-darkblue"></span> <span>Male</span>
+                    <div fxFlex="40" fxLayout="row" fxLayoutAlign="space-between center">
+                        <span class="dot-darkblue"></span> <span> {{pcGenderMale | number:'1.0-0'}}% Male</span>
                     </div>
-                    <div fxFlex="50"></div>
-                    <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between center">
-                        <span>Female</span> <span class="dot-lightblue"></span>
+                    <div fxFlex="20"></div>
+                    <div fxFlex="40" fxLayout="row" fxLayoutAlign="space-between center">
+                        <span>{{100 - pcGenderMale | number:'1.0-0'}}% Female</span> <span class="dot-lightblue"></span>
                     </div>
                   </div>
                   <br/>
-                  <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+                  <mat-progress-bar mode="determinate" [value]="pcGenderMale"></mat-progress-bar>
+                  <br/>
+                  <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-end none">
+                    <div fxFlex="30" fxLayout="column" fxLayoutAlign="space-between center">
+                        <span>{{male}}</span> 
+                        <span class="subtitle">Male</span>
+                    </div>
+                    <div fxFlex="50"></div>
+                    <div fxFlex="30" fxLayout="column" fxLayoutAlign="space-between center">
+                        <span>{{female}}</span>
+                        <span class="subtitle">Female</span>
+                    </div>
+                  </div>
               </div>
               <div class="rcorners2">
                   <mat-card-header>
@@ -128,14 +160,26 @@
                   </mat-card-header>
                   <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-end none">
                     <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between center">
-                        <span class="dot-darkblue"></span> Old
+                        <span class="dot-darkblue"></span>{{pcOld | number:'1.0-0'}}% Old
                     </div>
-                    <div fxFlex="50"></div>
+                    <div fxFlex="40"></div>
                     <div fxFlex="30" fxLayout="row" fxLayoutAlign="space-between center">
-                        New <span class="dot-lightblue"></span>
+                        {{100 - pcOld | number:'1.0-0'}}% New <span class="dot-lightblue"></span>
                     </div>
                   </div><br/>
-                  <mat-progress-bar mode="determinate" value="80"></mat-progress-bar>
+                  <mat-progress-bar mode="determinate" [value]="pcOld"></mat-progress-bar>
+                  <br/>
+                  <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="space-end none">
+                    <div fxFlex="30" fxLayout="column" fxLayoutAlign="space-between center">
+                        <span>529</span> 
+                        <span class="subtitle">Old</span>
+                    </div>
+                    <div fxFlex="50"></div>
+                    <div fxFlex="30" fxLayout="column" fxLayoutAlign="space-between center">
+                        <span>269</span>
+                        <span class="subtitle">New</span>
+                    </div>
+                  </div>
               </div>
               <div class="rcorners2">
                   <mat-card-header>
@@ -143,7 +187,7 @@
                   </mat-card-header>
 
                   <div id="pieChartProfitdiv" style="width: 100%; height: 200px"></div>
-                  <h4 style="float: right;">$45,299</h4>
+                  <h4 style="float: right;">${{totalProfit}}</h4>
               </div>
           </div>
 
