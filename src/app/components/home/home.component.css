@@ -1,5 +1,6 @@
 .mat-card-title {
     color: rgba(85, 85, 85, 0.938);
+    font-size: 21px;
 }
 
 .rcorners2 {
@@ -11,4 +12,9 @@
 .borderright {
     padding-right: 30px;
     border-right: 2px solid grey;
+}
+
+.subtitle {
+    color: rgba(0,0,0,.54);
+    font-size: 14px;
 }

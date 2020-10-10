@@ -69,35 +69,26 @@ export class HomeComponent implements OnInit {
   
         let chart = am4core.create("pieChartMarketingdiv", am4charts.PieChart);
         chart.data = [{
-          "country": "Lithuania",
-          "litres": 501.9
+          "country": "Book It App",
+          "value": 501.9
         }, {
-          "country": "Czech Republic",
-          "litres": 301.9
+          "country": "Walk In",
+          "value": 301.9
         }, {
-          "country": "Ireland",
-          "litres": 201.1
+          "country": "Drive In",
+          "value": 201.1
         }, {
-          "country": "Germany",
-          "litres": 165.8
+          "country": "Facebook",
+          "value": 165.8
         }, {
-          "country": "Australia",
-          "litres": 139.9
+          "country": "Instagram",
+          "value": 139.9
         }, {
-          "country": "Austria",
-          "litres": 128.3
-        }, {
-          "country": "UK",
-          "litres": 99
-        }, {
-          "country": "Belgium",
-          "litres": 60
-        }, {
-          "country": "The Netherlands",
-          "litres": 50
+          "country": "Google Maps",
+          "value": 128.3
         }];
         let pieSeries = chart.series.push(new am4charts.PieSeries());
-        pieSeries.dataFields.value = "litres";
+        pieSeries.dataFields.value = "value";
         pieSeries.dataFields.category = "country";
         pieSeries.labels.template.disabled = true;
         this.pieChartMarketing = chart;
