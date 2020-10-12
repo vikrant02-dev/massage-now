@@ -54,6 +54,16 @@ table {
     background: #fafafa;;
 }
 
+.marginb10{
+    margin-bottom: 10px;
+}
+
+.bordercash {
+    padding-right: 10px;
+    margin-right: 10px;
+    border-right: 2px solid grey;
+}
+
 
 /* / Extra small devices (portrait phones, less than 576px)
  */
@@ -94,7 +104,8 @@ table {
  */
 @media (min-width: 1366px) { 
     .borderright {
-        padding-right: 30px;
+        padding-right: 10px;
+        margin-right: 10px;
         border-right: 2px solid grey;
     }
  }

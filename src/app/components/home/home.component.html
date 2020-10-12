@@ -78,14 +78,14 @@
                   <mat-card-title>Current Cash in Drawer</mat-card-title>
               </mat-card-header>
               <br/>
-              <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="30px">
-                    <div class="borderright">
+              <div fxLayout="row" fxLayoutAlign="space-evenly center">
+                    <div class="bordercash">
                         <mat-card-header>
                             <mat-card-title>$12,434</mat-card-title>
                         </mat-card-header>
                         <h5>Kalgoorlie</h5>
                     </div>
-                    <div class="borderright">
+                    <div class="bordercash">
                         <mat-card-header>
                             <mat-card-title>$14,343</mat-card-title>
                         </mat-card-header>
@@ -102,8 +102,7 @@
       </div>
   </div>
 
-  <div fxLayout="row wrap"
-   fxLayoutAlign="space-between center" class="rcorners2">
+  <div fxLayout="row wrap" fxLayoutAlign="start center" class="rcorners2">
     <div class="borderright" [fxFlex] fxLayout="row" fxLayoutAlign="space-between none">
         <div>
             <mat-card-header>
@@ -159,8 +158,8 @@
     </div>
   </div>
 
-  <div fxLayout="row" fxLayoutAlign="space-between none" fxLayoutGap="30px" >
-          <div fxFlex="30" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-between none" >
+  <div fxLayout="row wrap" fxLayoutAlign="space-around start" >
+          <div [fxFlex] fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-between none" >
               <div class="rcorners2">
                   <mat-card-header>
                       <mat-card-title>Customer Gender</mat-card-title>
@@ -191,7 +190,7 @@
                     </div>
                   </div>
               </div>
-              <div class="rcorners2">
+              <div class="rcorners2 marginb10">
                   <mat-card-header>
                       <mat-card-title>Payment Methods</mat-card-title>
                   </mat-card-header>
@@ -200,7 +199,7 @@
               </div>
           </div>
 
-          <div fxFlex="30" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-between none" >
+          <div [fxFlex] fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-between none" >
               <div class="rcorners2">
                   <mat-card-header>
                       <mat-card-title>New vs Return</mat-card-title>
@@ -229,7 +228,7 @@
                     </div>
                   </div>
               </div>
-              <div class="rcorners2">
+              <div class="rcorners2 marginb10">
                   <mat-card-header>
                       <mat-card-title>Profit</mat-card-title>
                   </mat-card-header>
@@ -241,7 +240,7 @@
               </div>
           </div>
 
-          <div class="rcorners2" fxFlex="40">
+          <div class="rcorners2" [fxFlex]>
               <mat-card-header>
                   <mat-card-title>Top Spender Customer</mat-card-title>
               </mat-card-header>
