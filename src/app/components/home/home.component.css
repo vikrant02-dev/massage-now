@@ -64,6 +64,11 @@ table {
     border-right: 2px solid grey;
 }
 
+.borderbottom {
+    padding-bottom: 10px;
+    border-bottom: 2px solid grey;
+}
+
 
 /* / Extra small devices (portrait phones, less than 576px)
  */

@@ -24,6 +24,11 @@ export interface AverageTableElement {
   reference: string;
 }
 
+export interface LogsTableElement {
+  name: string;
+  datetime: string;
+}
+
 const ELEMENT_DATA: TableElement[] = [
   {position: '1st', name: 'Inaaya Dunlop', weight: '$6,000.00', symbol: '3 days ago'},
   {position: '2nd', name: 'Dillon Butt', weight: '$6,000.00', symbol: '3 days ago'},
@@ -45,6 +50,22 @@ const ELEMENT_DATA_AVERAGE_WAITED: AverageTableElement[] = [
   {name: 'Dougie Miles', time: 9, reference: '8700698182'},
 ];
 
+const ELEMENT_DATA_LOG_CANCELLED: LogsTableElement[] = [
+  {name: 'Katelyn Arnold', datetime: '10/23/20 17:54'},
+  {name: 'Dillon Butt', datetime: '10/23/20 17:54'},
+  {name: 'Chanelle Cooley', datetime: '10/23/20 17:54'},
+  {name: 'Ayda Foreman', datetime: '10/23/20 17:54'},
+  {name: 'Dougie Miles', datetime: '10/23/20 17:54'},
+];
+
+const ELEMENT_DATA_LOG_NOSHOW: LogsTableElement[] = [
+  {name: 'Katelyn Arnold', datetime: '10/23/20 17:54'},
+  {name: 'Dillon Butt', datetime: '10/23/20 17:54'},
+  {name: 'Chanelle Cooley', datetime: '10/23/20 17:54'},
+  {name: 'Ayda Foreman', datetime: '10/23/20 17:54'},
+  {name: 'Dougie Miles', datetime: '10/23/20 17:54'},
+];
+
 
 @Component({
   selector: 'app-home',
@@ -56,9 +77,12 @@ export class HomeComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'name', 'spent', 'lastSession'];
   displayedColumnsAverageWaitedTime: string[] = ['name', 'time', 'reference'];
+  displayedColumnsCancelledLog: string[] = ['name', 'datetime'];
+  displayedColumnsNoShowLog: string[] = ['name', 'datetime'];
   dataSourceTopSpender = ELEMENT_DATA;
   dataSourceAverageWaited = ELEMENT_DATA_AVERAGE_WAITED;
-
+  dataSourceLogCancelled = ELEMENT_DATA_LOG_CANCELLED;
+  dataSourceNoShowLog = ELEMENT_DATA_LOG_NOSHOW;
   locations: Dropdown[] = [
     {value: 'All', viewValue: 'All'},
     {value: 'Kalgoorlie', viewValue: 'Kalgoorlie'},

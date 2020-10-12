@@ -339,6 +339,75 @@
           <mat-card-header>
               <mat-card-title>Appointment Logs</mat-card-title>
           </mat-card-header>
+
+          
+          <div fxLayout="row" fxLayoutAlign="space-around none" fxLayoutGap="30px">
+            <div fxFlex="20" class="borderright" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="start center">
+                <div class="borderbottom">
+                    <p class="boldblue">27</p>
+                    <span class="subtitle">No show</span>
+                </div>
+                <div class="borderbottom">
+                    <p class="boldblue">17</p>
+                    <span class="subtitle">Cancelled</span>
+                </div>
+                <div>
+                    <p class="boldblue">25</p>
+                    <span class="subtitle">Late</span>
+                </div>
+            </div>
+            <div fxFlex="40" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-around center">
+                <table mat-table [dataSource]="dataSourceLogCancelled">
+      
+                  <!--- Note that these columns can be defined in any order.
+                        The actual rendered columns are set as a property on the row definition" -->
+                
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Cancelled </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                  </ng-container>
+                
+                  <!-- Spent Column -->
+                  <ng-container matColumnDef="datetime">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element"> {{element.datetime}}</td>
+                  </ng-container>
+                
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsCancelledLog"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsCancelledLog;"></tr>
+                </table>
+      
+                <button mat-raised-button color="primary">Show more</button>
+                    
+              </div>
+
+              <div fxFlex="40" fxLayout="column" fxLayoutGap="10px" fxLayoutAlign="space-around center">
+                <table mat-table [dataSource]="dataSourceNoShowLog">
+      
+                  <!--- Note that these columns can be defined in any order.
+                        The actual rendered columns are set as a property on the row definition" -->
+                
+                  <!-- Name Column -->
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Most Waited Customer </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                  </ng-container>
+                
+                  <!-- Spent Column -->
+                  <ng-container matColumnDef="datetime">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let element"> {{element.datetime}}</td>
+                  </ng-container>
+                
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsNoShowLog"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsNoShowLog;"></tr>
+                </table>
+      
+                <button mat-raised-button color="primary">Show more</button>
+                    
+              </div>
+          </div>
       </div>
   </div>
 
